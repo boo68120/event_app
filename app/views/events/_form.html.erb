@@ -1,0 +1,45 @@
+<%= form_for(@event, :html => { :style => 'border:thin solid black;padding:20px;margin:20px' } ) do |f| %>
+  <% if @event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+      <% @event.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    <%= f.label :code %><br>
+    <%= f.text_field :code, class: 'form-control', :value => DateTime.now.strftime('%Y%m%d%H%s') %>
+  </div>
+  <div class="field form-group">
+    <%= f.label :location %><br>
+    <%= f.select(:location, ["chennai","banglore", "mumbai", "delhi"], {}, { :class => 'form-control', style: "text-transform: uppercase;" }) %>
+  </div>
+  <div class="field form-group">
+    <%= f.label :Driver %><br>
+    <%= f.select(:driver_id, Driver.all.collect {|p| [ p.name, p.id ] }, {}, { :class => 'form-control', style: "text-transform: uppercase;" }) %>
+  </div>
+  <div class="field form-group">
+    <%= f.label :loaded %><br>
+    <%= f.check_box :loaded, {:class => "form-control", :style => "align:left;"}, "true", "false" %>
+  </div>
+ 
+
+  <%#= f.fields_for :equipment, remote: true do |builder| %>
+        <%= render 'equipment_form' %>
+  <%# end %>
+
+  <div class="field form-group">
+    <%= f.label :equipment_id %><br>
+    <%= f.hidden_field :equipment_id, class: 'form-control' %>
+  </div>
+
+  <div class="actions form-group">
+    <%= f.submit class: 'btn btn-success'%>
+  </div>
+
+   <% end %>

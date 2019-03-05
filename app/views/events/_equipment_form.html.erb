@@ -1,0 +1,10 @@
+<div class="field form-group">
+    <%= label_tag :equipment_no %><br>
+    <%= text_field_tag :equipment_no, "", class: 'form-control', onchange: "javascript: myFunction(this.value)"%>
+  </div>
+   <div class="field form-group">
+    <%= label_tag :equipment_type %><br>
+    <%= select_tag "equipment_type_id", options_for_select(EquipmentType.all.collect {|p| [ p.name, p.id ] }), class: 'form-control', style: "text-transform: uppercase;", onchange: "javascript: myFunction(this.value)"  %>
+  </div>
+
+  <!--, :onchange => "javascript: this.form.submit();" -->
